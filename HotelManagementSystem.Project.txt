@@ -1,0 +1,2332 @@
+// Entity Class:
+package com.hotelManagement.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Booking {
+@Id
+private int BookingID;
+private String CheckinDate;
+private String CheckoutDate;
+private String TotalPrice; 
+
+
+@ManyToOne
+@JoinColumn(name="GuestID")
+private Guest guest;
+
+@ManyToOne
+@JoinColumn(name="RoomId")
+private Room rooms;
+
+@OneToMany(mappedBy="Bk",cascade=CascadeType.ALL)
+List<Payment> payt=new ArrayList<Payment>();
+
+
+
+public Booking() {
+	super();
+
+}
+
+public int getBookingID() {
+	return BookingID;
+}
+
+public void setBookingID(int bookingID) {
+	BookingID = bookingID;
+}
+
+
+public String getCheckinDate() {
+	return CheckinDate;
+}
+
+public void setCheckinDate(String checkinDate) {
+	CheckinDate = checkinDate;
+}
+
+public String getCheckoutDate() {
+	return CheckoutDate;
+}
+
+public void setCheckoutDate(String checkoutDate) {
+	CheckoutDate = checkoutDate;
+}
+
+public String getTotalPrice() {
+	return TotalPrice;
+}
+
+public void setTotalPrice(String totalPrice) {
+	TotalPrice = totalPrice;
+}
+
+public Guest getGuest() {
+	return guest;
+}
+
+public void setGuest(Guest guest) {
+	this.guest = guest;
+}
+
+public Room getRooms() {
+	return rooms;
+}
+
+public void setRooms(Room rooms) {
+	this.rooms = rooms;
+}
+
+public List<Payment> getPayt() {
+	return payt;
+}
+
+public void setPayt(List<Payment> payt) {
+	this.payt = payt;
+}
+
+@Override
+public String toString() {
+	return "Booking [BookingID=" + BookingID + ", CheckinDate=" + CheckinDate + ", CheckoutDate=" + CheckoutDate
+			+ ", TotalPrice=" + TotalPrice + ", guest=" + guest + "]";
+}
+
+}
+
+package com.hotelManagement.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Guest {
+@Id
+private int GuestID;
+private String FirstName;
+private  String LastName;
+private String DateOfBirth;
+private String Address;
+private Long phone;
+private String Email;
+@OneToMany(mappedBy="guest",cascade=CascadeType.ALL)
+List<Booking> bookinglist=new ArrayList<Booking>();
+public Guest() {
+	super();
+
+}
+public int getGuestID() {
+	return GuestID;
+}
+public void setGuestID(int guestID) {
+	GuestID = guestID;
+}
+public String getFirstName() {
+	return FirstName;
+}
+public void setFirstName(String firstName) {
+	FirstName = firstName;
+}
+public String getLastName() {
+	return LastName;
+}
+public void setLastName(String lastName) {
+	LastName = lastName;
+}
+public String getDateOfBirth() {
+	return DateOfBirth;
+}
+public void setDateOfBirth(String dateOfBirth) {
+	DateOfBirth = dateOfBirth;
+}
+public String getAddress() {
+	return Address;
+}
+public void setAddress(String address) {
+	Address = address;
+}
+public Long getPhone() {
+	return phone;
+}
+public void setPhone(Long phone) {
+	this.phone = phone;
+}
+public String getEmail() {
+	return Email;
+}
+public void setEmail(String email) {
+	Email = email;
+}
+public List<Booking> getBookinglist() {
+	return bookinglist;
+}
+public void setBookinglist(List<Booking> bookinglist) {
+	this.bookinglist = bookinglist;
+}
+@Override
+public String toString() {
+	return "Guest [GuestID=" + GuestID + ", FirstName=" + FirstName + ", LastName=" + LastName + ", DateOfBirth="
+			+ DateOfBirth + ", Address=" + Address + ", phone=" + phone + ", Email=" + Email + "]";
+}
+
+
+
+}
+
+package com.hotelManagement.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+public class Hotel {
+@Id
+private int HotelID;
+private String Name;
+private String Address;
+private String Phone;
+private String Email;
+private int Stars;
+private String CheckinTime;
+private String CheckoutTime;
+
+@OneToMany(mappedBy="hotel",cascade=CascadeType.ALL)
+List<Staff> stafflist=new ArrayList<Staff>();
+
+
+@OneToMany(mappedBy="htl",cascade=CascadeType.ALL)
+List<Room> roomslist=new ArrayList<Room>();
+
+
+
+public Hotel() 
+{
+	
+}
+
+public int getHotelID() {
+	return HotelID;
+}
+
+public void setHotelID(int hotelID) {
+	HotelID = hotelID;
+}
+
+public String getPhone() {
+	return Phone;
+}
+
+public void setPhone(String phone) {
+	Phone = phone;
+}
+
+public String getName() {
+	return Name;
+}
+
+public void setName(String name) {
+	Name = name;
+}
+
+public String getAddress() {
+	return Address;
+}
+
+public void setAddress(String address) {
+	Address = address;
+}
+
+
+public String getEmail() {
+	return Email;
+}
+
+public void setEmail(String email) {
+	Email = email;
+}
+
+public int getStars() {
+	return Stars;
+}
+
+public void setStars(int stars) {
+	Stars = stars;
+}
+
+public String getCheckinTime() {
+	return CheckinTime;
+}
+
+public void setCheckinTime(String checkinTime) {
+	CheckinTime = checkinTime;
+}
+
+public String getCheckoutTime() {
+	return CheckoutTime;
+}
+
+public void setCheckoutTime(String checkoutTime) {
+	CheckoutTime = checkoutTime;
+}
+
+public List<Staff> getStafflist() {
+	return stafflist;
+}
+
+public void setStafflist(List<Staff> stafflist) {
+	this.stafflist = stafflist;
+}
+
+public List<Room> getRoomslist() {
+	return roomslist;
+}
+
+public void setRoomslist(List<Room> roomslist) {
+	this.roomslist = roomslist;
+}
+
+@Override
+public String toString() {
+	return "Hotel [HotelID=" + HotelID + ", Name=" + Name + ", Address=" + Address + ", Phone=" + Phone + ", Email="
+			+ Email + ", Stars=" + Stars + ", CheckinTime=" + CheckinTime + ", CheckoutTime=" + CheckoutTime + "]";
+}
+
+
+
+
+}
+
+package com.hotelManagement.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Payment {
+@Id
+private int PaymentID;
+private double Amount;
+private String PaymentendDate;
+private String paymentMethod;
+
+
+@ManyToOne
+@JoinColumn(name="BookingID")
+private Booking Bk;
+
+
+public Payment() {
+	super();
+}
+
+
+public int getPaymentID() {
+	return PaymentID;
+}
+
+
+public void setPaymentID(int paymentID) {
+	PaymentID = paymentID;
+}
+
+
+public double getAmount() {
+	return Amount;
+}
+
+
+public void setAmount(double amount) {
+	Amount = amount;
+}
+
+
+public String getPaymentendDate() {
+	return PaymentendDate;
+}
+
+
+public void setPaymentendDate(String paymentendDate) {
+	PaymentendDate = paymentendDate;
+}
+
+
+public String getPaymentMethod() {
+	return paymentMethod;
+}
+
+
+public void setPaymentMethod(String paymentMethod) {
+	this.paymentMethod = paymentMethod;
+}
+
+
+public Booking getBk() {
+	return Bk;
+}
+
+
+public void setBk(Booking bk) {
+	Bk = bk;
+}
+
+
+@Override
+public String toString() {
+	return "Payment [PaymentID=" + PaymentID + ", Amount=" + Amount + ", PaymentendDate="
+			+ PaymentendDate + ", paymentMethod=" + paymentMethod + "]";
+}
+
+}
+
+package com.hotelManagement.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+@Entity
+public class Room {
+@Id
+private int RoomId;
+private String Status;
+@ManyToOne
+@JoinColumn(name="HotelID")
+private Hotel htl;
+@ManyToOne
+@JoinColumn(name="TypeID")
+private RoomType roomtype;
+
+
+@OneToMany(mappedBy="rooms",cascade=CascadeType.ALL)
+List<Booking> bookings=new ArrayList<Booking>();
+
+
+
+public RoomType getRoomtype() {
+	return roomtype;
+}
+public void setRoomtype(RoomType roomtype) {
+	this.roomtype = roomtype;
+}
+public List<Booking> getBookings() {
+	return bookings;
+}
+public void setBookings(List<Booking> bookings) {
+	this.bookings = bookings;
+}
+
+
+public Room() {
+	super();
+}
+public int getRoomId() {
+	return RoomId;
+}
+public void setRoomId(int roomId) {
+	RoomId = roomId;
+}
+
+public String getStatus() {
+	return Status;
+}
+public void setStatus(String status) {
+	Status = status;
+}
+public Hotel getHtl() {
+	return htl;
+}
+public void setHtl(Hotel htl) {
+	this.htl = htl;
+}
+
+@Override
+public String toString() {
+	return "Room [RoomNumber=" + RoomId +  ", Status=" + Status + "]";
+}
+
+
+}
+
+package com.hotelManagement.entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+public class RoomType {
+@Id
+private int TypeID;
+private String Name;
+private String Description;
+private Double PricePerDay;
+private int Capacity;
+
+
+@OneToMany(mappedBy="roomtype",cascade=CascadeType.ALL)
+List<Room> roomslist=new ArrayList<Room>();
+
+public RoomType() 
+{
+	
+}
+
+public int getTypeID() {
+	return TypeID;
+}
+
+public void setTypeID(int typeID) {
+	TypeID = typeID;
+}
+
+public String getName() {
+	return Name;
+}
+
+public void setName(String name) {
+	Name = name;
+}
+
+public String getDescription() {
+	return Description;
+}
+
+public void setDescription(String description) {
+	Description = description;
+}
+
+public Double getPricePerDay() {
+	return PricePerDay;
+}
+
+public void setPricePerDay(Double pricePerDay) {
+	PricePerDay = pricePerDay;
+}
+
+public int getCapacity() {
+	return Capacity;
+}
+
+public void setCapacity(int capacity) {
+	Capacity = capacity;
+}
+
+public List<Room> getRoomslist() {
+	return roomslist;
+}
+
+public void setRoomslist(List<Room> roomslist) {
+	this.roomslist = roomslist;
+}
+
+@Override
+public String toString() {
+	return "RoomType [TypeID=" + TypeID + ", Name=" + Name + ", Description=" + Description + ", PricePerDay="
+			+ PricePerDay + ", Capacity=" + Capacity + "]";
+}
+
+
+}
+
+package com.hotelManagement.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Staff {
+@Id
+private int staffID;
+private String FirstName;
+private String LastName;
+private String Position;
+private Double Salary;
+private String DateOfBirth;
+private String Phone;
+private String Email;
+private String HireDate;
+@ManyToOne
+@JoinColumn(name="HotelID")
+private Hotel hotel;
+
+public Staff() {
+	super();
+	
+}
+public int getStaffID() {
+	return staffID;
+}
+public void setStaffID(int staffID) {
+	this.staffID = staffID;
+}
+public String getFirstName() {
+	return FirstName;
+}
+public void setFirstName(String firstName) {
+	FirstName = firstName;
+}
+public String getLastName() {
+	return LastName;
+}
+public void setLastName(String lastName) {
+	LastName = lastName;
+}
+public String getPosition() {
+	return Position;
+}
+public void setPosition(String position) {
+	Position = position;
+}
+public Double getSalary() {
+	return Salary;
+}
+public void setSalary(Double salary) {
+	Salary = salary;
+}
+public String getDateOfBirth() {
+	return DateOfBirth;
+}
+public void setDateOfBirth(String dateOfBirth) {
+	DateOfBirth = dateOfBirth;
+}
+public String getPhone() {
+	return Phone;
+}
+public void setPhone(String phone) {
+	Phone = phone;
+}
+public String getEmail() {
+	return Email;
+}
+public void setEmail(String email) {
+	Email = email;
+}
+public String getHireDate() {
+	return HireDate;
+}
+public void setHireDate(String hireDate) {
+	HireDate = hireDate;
+}
+public Hotel getHotel() {
+	return hotel;
+}
+public void setHotel(Hotel hotel) {
+	this.hotel = hotel;
+}
+@Override
+public String toString() {
+	return "Staff [staffID=" + staffID + ", FirstName=" + FirstName + ", LastName=" + LastName + ", Position="
+			+ Position + ", Salary=" + Salary + ", DateOfBirth=" + DateOfBirth + ", Phone=" + Phone + ", Email=" + Email
+			+ ", HireDate=" + HireDate + "]";
+}
+
+//services:
+
+package com.hotelManagement.service;
+
+import com.hotelManagement.entity.Booking;
+
+public interface BookingService {
+
+		public void insertBooking(Booking B);
+		public void updateBooking(Booking B);
+		public void deleteBooking(Booking B);
+		public int displayBooking();
+		public int getBookingbyId(Integer id);
+        public void add(Integer gid,Booking B);
+        public void addRoom(Integer rid,Booking B);
+}
+
+
+package com.hotelManagement.service;
+
+import com.hotelManagement.entity.Guest;
+
+public interface GuestService {
+
+	public void insertGuest(Guest G);
+	public void updateGuest(Guest G);
+	public void deleteGuest(Guest G);
+	public int displayGuest();
+	public int getGuestbyId(Integer id);
+
+}
+
+package com.hotelManagement.service;
+
+import com.hotelManagement.entity.Booking;
+import com.hotelManagement.entity.Hotel;
+
+public interface HotelService {
+	public void insertHotel(Hotel H);
+	public void updateHotel(Hotel H);
+	public void deleteHotel(Hotel H);
+	public int displayHotel();
+	public int getHotelbyId(Integer id);
+	
+}
+
+package com.hotelManagement.service;
+
+import com.hotelManagement.entity.Booking;
+import com.hotelManagement.entity.Payment;
+
+public interface PaymentService
+{
+	public void insertPayment(Payment p);
+	public void updatePayment(Payment p);
+	public void deletePayment(Payment p);
+	public int displayPayment();
+	public int getPaymentbyId(Integer id);
+	public void add(Integer Bid,Payment P);
+}
+
+package com.hotelManagement.service;
+
+import com.hotelManagement.entity.Guest;
+import com.hotelManagement.entity.Room;
+import com.hotelManagement.entity.RoomType;
+
+public interface RoomService {
+	public void insertRoom(Room R);
+	public void updateRoom(Room R);
+	public void deleteRoom(Room R);
+	public int displayRoom();
+	public int getRoombyId(Integer id);
+	public void add(Integer hid,Room R);
+	public void addRoomType(Integer rid,Room R);
+
+}
+
+package com.hotelManagement.service;
+
+import com.hotelManagement.entity.RoomType;
+
+public interface RoomTypeService {
+
+		public void insertRoomType(RoomType RT);
+		public void updateRoomType(RoomType RT);
+		public void deleteRoomType(RoomType RT);
+		public int displayRoomType();
+		public int getRoomTypebyId(Integer id);
+
+}
+
+package com.hotelManagement.service;
+
+import com.hotelManagement.entity.Booking;
+import com.hotelManagement.entity.Staff;
+
+public interface StaffService {
+
+		public void insertstaff(Staff S);
+		public void updateStaff(Staff S);
+		public void deleteStaff(Staff s);
+		public int displayStaff();
+		public int getStaffbyId(Integer id);
+		public void add(Integer hid,Staff S);
+}
+
+// serviceimpl:
+
+package com.hotelManagement.serviceImpl;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.hotelManagement.entity.Booking;
+import com.hotelManagement.entity.Guest;
+import com.hotelManagement.entity.Room;
+import com.hotelManagement.service.BookingService;
+import com.hotelManagement.utility.UtilityConfig;
+
+public class BookingServiceImpl implements BookingService {
+ Session session;
+ Transaction transaction;
+ @Override
+	public void insertBooking(Booking B) {
+	
+		try {
+			session=UtilityConfig.getSession();
+		    transaction=session.beginTransaction();
+			session.saveOrUpdate(B);
+			transaction.commit();
+			System.out.println("inserted booking details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public void updateBooking(Booking B) {
+		try {
+			session=UtilityConfig.getSession();
+		    transaction=session.beginTransaction();
+			session.saveOrUpdate(B);
+			transaction.commit();
+			System.out.println("updated booking details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public void deleteBooking(Booking B) {
+		try {
+			session=UtilityConfig.getSession();
+			transaction=session.beginTransaction();
+			session.delete(B);
+			transaction.commit();
+			System.out.println("deleted booking details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public int displayBooking()
+	{
+		try {
+			session=UtilityConfig.getSession();
+			TypedQuery tq=session.createQuery("from Booking");
+			List<Booking> list=tq.getResultList();
+			Iterator<Booking> itr=list.iterator();
+			while(itr.hasNext())
+			{
+				System.out.println(itr.next());
+			}
+			}
+			finally
+			{
+				session.close();
+			}
+		return 1;
+	}
+	
+
+	@Override
+	public int getBookingbyId(Integer id) {
+		try {
+			session=UtilityConfig.getSession();
+			Booking b=session.get(Booking.class, id);
+			System.out.println(b);
+		}
+		finally {
+			session.close();
+		}
+		return 1;
+		
+	}
+
+	@Override
+	public void add(Integer gid, Booking B) {
+		session=UtilityConfig.getSession();
+		transaction=session.beginTransaction();
+		Guest g=session.get(Guest.class, gid);
+		B.setGuest(g);
+		session.saveOrUpdate(B);
+		transaction.commit();
+		
+	}
+
+	@Override
+	public void addRoom(Integer rid, Booking B) {
+		session=UtilityConfig.getSession();
+		transaction=session.beginTransaction();
+		Room r=session.get(Room.class, rid);
+		B.setRooms(r);
+		session.saveOrUpdate(B);
+		transaction.commit();
+		
+	}
+
+	
+}
+
+package com.hotelManagement.serviceImpl;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.hotelManagement.entity.Guest;
+import com.hotelManagement.service.GuestService;
+import com.hotelManagement.utility.UtilityConfig;
+
+public class GuestServiceImpl implements GuestService {
+ Session session;
+ Transaction transaction;
+	@Override
+	public void insertGuest(Guest G) {
+		try {
+			session=UtilityConfig.getSession();
+		    transaction=session.beginTransaction();
+			session.save(G);
+			transaction.commit();
+			System.out.println("inserted guest details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+
+	@Override
+	public void deleteGuest(Guest G) {
+		try {
+			session=UtilityConfig.getSession();
+			transaction=session.beginTransaction();
+			session.delete(G);
+			transaction.commit();
+			System.out.println("deleted guest details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public int displayGuest()
+	{
+		try {
+			session=UtilityConfig.getSession();
+			TypedQuery tq=session.createQuery("from Guest");
+			List<Guest> list=tq.getResultList();
+			Iterator<Guest> itr=list.iterator();
+			while(itr.hasNext())
+			{
+				System.out.println(itr.next());
+			}
+			}
+			finally
+			{
+				session.close();
+			}
+		return 1;
+	}
+
+	@Override
+	public int getGuestbyId(Integer id) {
+		try {
+			session=UtilityConfig.getSession();
+			Guest g=session.get(Guest.class, id);
+			System.out.println(g);
+		}
+		finally {
+			session.close();
+		}
+		return 1;
+			
+	}
+
+
+	@Override
+	public void updateGuest(Guest G) {
+		try {
+			session=UtilityConfig.getSession();
+		    transaction=session.beginTransaction();
+			session.saveOrUpdate(G);
+			transaction.commit();
+			System.out.println("updated room details");
+			}
+			finally {
+			session.close();
+			}
+		
+	}
+
+}
+
+package com.hotelManagement.serviceImpl;
+	import java.util.Iterator;
+	import java.util.List;
+
+	import javax.persistence.TypedQuery;
+
+	import org.hibernate.Session;
+	import org.hibernate.Transaction;
+
+import com.hotelManagement.entity.Booking;
+import com.hotelManagement.entity.Guest;
+import com.hotelManagement.entity.Hotel;
+import com.hotelManagement.entity.Staff;
+import com.hotelManagement.service.HotelService;
+import com.hotelManagement.utility.UtilityConfig;
+
+public class HotelServiceImpl implements HotelService {
+	 Session session;
+	 Transaction transaction;
+	 @Override
+		public void insertHotel(Hotel H) {
+			try {
+				session=UtilityConfig.getSession();
+			    transaction=session.beginTransaction();
+				session.save(H);
+				transaction.commit();
+				System.out.println("inserted Hotel details");
+				}
+				finally {
+				session.close();
+				
+				}
+			
+		}
+	 public void updateHotel(Hotel H) {
+			try {
+				session=UtilityConfig.getSession();
+			    transaction=session.beginTransaction();
+				session.saveOrUpdate(H);
+				transaction.commit();
+				System.out.println("updated Hotel details");
+				}
+				finally {
+				session.close();
+				
+				}
+			
+		}
+
+		@Override
+		public void deleteHotel(Hotel H) {
+			try {
+				session=UtilityConfig.getSession();
+				transaction=session.beginTransaction();
+				session.delete(H);
+				transaction.commit();
+				System.out.println("deleted Hotel details");
+				}
+				finally {
+				session.close();
+				
+				}
+			
+		}
+
+		@Override
+		public int displayHotel()
+		{
+			try {
+				session=UtilityConfig.getSession();
+				TypedQuery tq=session.createQuery("from Hotel");
+				List<Hotel> list=tq.getResultList();
+				Iterator<Hotel> itr=list.iterator();
+				while(itr.hasNext())
+				{
+					System.out.println(itr.next());
+				}
+				}
+				finally
+				{
+					session.close();
+				}
+			return 1;
+		}
+
+		@Override
+		public int getHotelbyId(Integer id) {
+			try {
+				session=UtilityConfig.getSession();
+				Hotel h=session.get(Hotel.class, id);
+				System.out.println(h);
+			}
+			finally {
+				session.close();
+			}
+			return 1;
+				
+		}
+		
+}
+
+package com.hotelManagement.serviceImpl;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.hotelManagement.entity.Booking;
+import com.hotelManagement.entity.Guest;
+import com.hotelManagement.entity.Payment;
+import com.hotelManagement.service.PaymentService;
+import com.hotelManagement.utility.UtilityConfig;
+
+public class PaymentServiceImpl implements PaymentService {
+ Session session;
+ Transaction transaction;
+
+	@Override
+	public void deletePayment(Payment p) {
+		try {
+			session=UtilityConfig.getSession();
+			transaction=session.beginTransaction();
+			session.delete(p);
+			transaction.commit();
+			System.out.println("deleted payment details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public  int displayPayment()
+	{
+		try {
+			session=UtilityConfig.getSession();
+			TypedQuery tq=session.createQuery("from Payment");
+			List<Payment> list=tq.getResultList();
+			Iterator<Payment> itr=list.iterator();
+			while(itr.hasNext())
+			{
+				System.out.println(itr.next());
+			}
+			}
+			finally
+			{
+				session.close();
+			}
+		    return 1;
+		
+		
+		
+		
+		
+	}
+
+	@Override
+	public int getPaymentbyId(Integer id) {
+		try {
+			session=UtilityConfig.getSession();
+			Payment p=session.get(Payment.class, id);
+			System.out.println(p);
+		}
+		finally {
+			session.close();
+		}
+		return 1;
+			
+	}
+
+	@Override
+	public void insertPayment(Payment p) {
+		try {
+			session=UtilityConfig.getSession();
+		    transaction=session.beginTransaction();
+			session.save(p);
+			transaction.commit();
+			System.out.println("inserted payment details");
+			}
+			finally {
+			session.close();
+			}
+	}
+
+	@Override
+	public void updatePayment(Payment p) {
+		try {
+			session=UtilityConfig.getSession();
+		    transaction=session.beginTransaction();
+			session.saveOrUpdate(p);
+			transaction.commit();
+			System.out.println("updated payment details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public void add(Integer Bid, Payment P) {
+			session=UtilityConfig.getSession();
+			transaction=session.beginTransaction();
+			Booking B=session.get(Booking.class, Bid);
+			P.setBk(B);
+			session.saveOrUpdate(P);
+			transaction.commit();	
+		
+	}
+
+}
+
+package com.hotelManagement.serviceImpl;
+
+import java.util.Iterator;
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.hotelManagement.entity.Booking;
+import com.hotelManagement.entity.Guest;
+import com.hotelManagement.entity.Hotel;
+import com.hotelManagement.entity.Room;
+import com.hotelManagement.entity.RoomType;
+import com.hotelManagement.service.RoomService;
+import com.hotelManagement.utility.UtilityConfig;
+
+public class RoomServiceImpl implements RoomService {
+ Session session=UtilityConfig.getSession();
+ Transaction transaction;
+	@Override
+	public void insertRoom(Room R) {
+		try {
+			session=UtilityConfig.getSession();
+		    transaction=session.beginTransaction();
+		    
+			session.saveOrUpdate(R);
+			transaction.commit();
+			System.out.println("inserted room details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public void updateRoom(Room R) {
+		try {
+			session=UtilityConfig.getSession();
+		    transaction=session.beginTransaction();
+			session.saveOrUpdate(R);
+			transaction.commit();
+			System.out.println("updated room details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public void deleteRoom(Room R) {
+		try {
+			session=UtilityConfig.getSession();
+			transaction=session.beginTransaction();
+			session.delete(R);
+			transaction.commit();
+			System.out.println("deleted room details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public int displayRoom()
+	{
+		try {
+			session=UtilityConfig.getSession();
+			TypedQuery tq=session.createQuery("from Room");
+			List<Room> list=tq.getResultList();
+			Iterator<Room> itr=list.iterator();
+			while(itr.hasNext())
+			{
+				System.out.println(itr.next());
+			}
+			}
+			finally
+			{
+				session.close();
+			}
+		return 1;
+		
+	}
+	
+
+	@Override
+	public int getRoombyId(Integer id) {
+		try {
+			session=UtilityConfig.getSession();
+			Room r=session.load(Room.class, id);
+			System.out.println(r);
+		}
+		finally {
+			session.close();
+		}
+		return 1;
+		
+		
+	}
+
+	@Override
+	public void add(Integer hid, Room R) {
+		try {
+			session=UtilityConfig.getSession();
+			transaction=session.beginTransaction();
+			Hotel h=session.get(Hotel.class, hid);
+			R.setHtl(h);
+			session.saveOrUpdate(R);
+			transaction.commit();
+		}
+		finally {
+			session.close();
+		}
+		
+	}
+
+	@Override
+	public void addRoomType(Integer rid, Room R) {
+		try {
+		session=UtilityConfig.getSession();
+		transaction=session.beginTransaction();
+		RoomType rt=session.get(RoomType.class, rid);
+		R.setRoomtype(rt);
+		session.saveOrUpdate(R);
+		transaction.commit();
+		}
+		finally {
+			session.close();
+		}
+	}
+
+}
+
+package com.hotelManagement.serviceImpl;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import com.hotelManagement.entity.RoomType;
+import com.hotelManagement.service.RoomTypeService;
+import com.hotelManagement.utility.UtilityConfig;
+
+public class RoomTypeServiceImpl implements RoomTypeService {
+ Session session;
+ Transaction transaction;
+	@Override
+	public void insertRoomType(RoomType RT) {
+		try {
+			session=UtilityConfig.getSession();
+		    transaction=session.beginTransaction();
+			session.save(RT);
+			transaction.commit();
+			System.out.println("inserted roomtype details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public void updateRoomType(RoomType RT) {
+		try {
+			session=UtilityConfig.getSession();
+		    transaction=session.beginTransaction();
+			session.saveOrUpdate(RT);
+			transaction.commit();
+			System.out.println("updated roomtype details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public void deleteRoomType(RoomType RT) {
+		try {
+			session=UtilityConfig.getSession();
+			transaction=session.beginTransaction();
+			session.delete(RT);
+			transaction.commit();
+			System.out.println("deleted roomtype details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public int displayRoomType()
+	{
+		try {
+			session=UtilityConfig.getSession();
+			TypedQuery tq=session.createQuery("from RoomType");
+			List<RoomType> list=tq.getResultList();
+			Iterator<RoomType> itr=list.iterator();
+			while(itr.hasNext())
+			{
+				System.out.println(itr.next());
+			}
+			}
+			finally
+			{
+				session.close();
+			}
+		return 1;
+	}
+
+	@Override
+	public int getRoomTypebyId(Integer id) {
+		try {
+			session=UtilityConfig.getSession();
+			RoomType rt=session.get(RoomType.class, id);
+			System.out.println(rt);
+		}
+		finally {
+			session.close();
+		}
+		return 1;
+			
+	}
+
+	
+}
+
+package com.hotelManagement.serviceImpl;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.hotelManagement.entity.Booking;
+import com.hotelManagement.entity.Guest;
+import com.hotelManagement.entity.Hotel;
+import com.hotelManagement.entity.Staff;
+import com.hotelManagement.service.StaffService;
+import com.hotelManagement.utility.UtilityConfig;
+
+public class StaffServiceImpl implements StaffService {
+ Session session;
+ Transaction transaction;
+	
+
+	@Override
+	public void updateStaff(Staff S) {
+		try {
+			session=UtilityConfig.getSession();
+		    transaction=session.beginTransaction();
+			session.saveOrUpdate(S);
+			transaction.commit();
+			System.out.println("updated staff details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public void deleteStaff(Staff s) {
+		try {
+			session=UtilityConfig.getSession();
+			transaction=session.beginTransaction();
+			session.delete(s);
+			transaction.commit();
+			System.out.println("deleted staff details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public int displayStaff()
+	{
+		try {
+			session=UtilityConfig.getSession();
+			TypedQuery tq=session.createQuery("from Staff");
+			List<Staff> list=tq.getResultList();
+			Iterator<Staff> itr=list.iterator();
+			while(itr.hasNext())
+			{
+				System.out.println(itr.next());
+			}
+			}
+			finally
+			{
+				session.close();
+			}
+		return 1;
+	}
+
+	@Override
+	public void insertstaff(Staff S) {
+		try {
+			session=UtilityConfig.getSession();
+		    transaction=session.beginTransaction();
+			session.save(S);
+			transaction.commit();
+			System.out.println("inserted staff details");
+			}
+			finally {
+			session.close();
+			
+			}
+		
+	}
+
+	@Override
+	public int getStaffbyId(Integer id) {
+		try {
+			session=UtilityConfig.getSession();
+			Staff s=session.get(Staff.class, id);
+			System.out.println(s);
+		}
+		finally {
+			session.close();
+		}
+		return 1;
+		
+	}
+
+	@Override
+	public void add(Integer hid, Staff S) {
+			session=UtilityConfig.getSession();
+			transaction=session.beginTransaction();
+			Hotel h=session.get(Hotel.class, hid);
+			S.setHotel(h);
+			session.saveOrUpdate(S);
+			transaction.commit();
+		
+	}
+	
+}
+
+// Utility Config:
+
+package com.hotelManagement.utility;
+
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class UtilityConfig {
+	
+
+		public static Session getSession() {
+			
+		Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
+		SessionFactory sessionFactory = configuration.buildSessionFactory();
+		Session session=sessionFactory.openSession();
+		return session;
+		
+	}
+
+}
+
+//hibernate.cfg.xml:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-configuration>
+  <session-factory>
+    <!-- Database connection settings -->
+    <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hotelmanagementsystem</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">Kavya@7321</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+
+    <!-- JDBC connection pool settings -->
+    <property name="hibernate.c3p0.min_size">5</property>
+    <property name="hibernate.c3p0.max_size">20</property>
+
+    <!-- Other Hibernate properties -->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.show_sql">true</property>
+    
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <mapping class="com.hotelManagement.entity.Room"/>
+    <mapping class="com.hotelManagement.entity.RoomType"/>
+    <mapping class="com.hotelManagement.entity.Staff"/>
+    <mapping class="com.hotelManagement.entity.Hotel"/>
+    <mapping class="com.hotelManagement.entity.Booking"/>
+    <mapping class="com.hotelManagement.entity.Guest"/>
+    <mapping class="com.hotelManagement.entity.Payment"/>
+    
+
+
+
+</session-factory>
+  
+</hibernate-configuration>
+
+//Project Implementation:
+
+package com.hotelManagementSystem;
+
+import java.util.Scanner;
+
+import com.hotelManagement.entity.Booking;
+import com.hotelManagement.entity.Guest;
+import com.hotelManagement.entity.Hotel;
+import com.hotelManagement.entity.Payment;
+import com.hotelManagement.entity.Room;
+import com.hotelManagement.entity.RoomType;
+import com.hotelManagement.entity.Staff;
+import com.hotelManagement.service.BookingService;
+import com.hotelManagement.serviceImpl.BookingServiceImpl;
+import com.hotelManagement.serviceImpl.GuestServiceImpl;
+import com.hotelManagement.serviceImpl.HotelServiceImpl;
+import com.hotelManagement.serviceImpl.PaymentServiceImpl;
+import com.hotelManagement.serviceImpl.RoomServiceImpl;
+import com.hotelManagement.serviceImpl.RoomTypeServiceImpl;
+import com.hotelManagement.serviceImpl.StaffServiceImpl;
+
+public class ProjectImplementation 
+{
+	public static void main(String args[])
+	{
+		System.out.println("Welcome to the Hotel management system");
+		Scanner sc=new Scanner(System.in);
+		System.out.println("You are 1.User 2.Admin \nEnter Choice");
+		int user = sc.nextInt();
+		
+		RoomServiceImpl rs = new RoomServiceImpl();
+		RoomTypeServiceImpl rts=new RoomTypeServiceImpl();
+		HotelServiceImpl hs=new HotelServiceImpl();
+		StaffServiceImpl ss=new StaffServiceImpl();
+		BookingServiceImpl bks=new BookingServiceImpl();
+		GuestServiceImpl Gs=new GuestServiceImpl();
+		PaymentServiceImpl Ps=new PaymentServiceImpl();
+		
+		if (user == 1) 
+		{
+	     System.out.println("1.get room details");
+	     System.out.println("2.get roomtype details");
+	     System.out.println("3.get hotel details");
+	     System.out.println("4.get booking details");
+	     System.out.println("5.get staff details");
+	     System.out.println("6.get guest details");
+	     System.out.println("7.get Payment details");
+	     System.out.println("\nenter choice:");
+	     int a = sc.nextInt();
+	     while (a > 0) 
+	    	 
+	     {
+			switch (a)
+			{
+            case 1: 
+                 Integer rid;
+       	      System.out.println("enter room id:");
+       	      rid=sc.nextInt();
+                 rs.getRoombyId(rid);
+                 break;
+            case 2:
+           	    Integer rtd;
+                System.out.println("enter roomtype id:");
+                rtd=sc.nextInt();
+                rts.getRoomTypebyId(rtd);
+                break;
+			case 3:
+				 Integer hid;
+			     System.out.println("enter hotel id:");
+			     hid=sc.nextInt();
+			     hs.getHotelbyId(hid);
+			     break;
+			case 4:
+				 Integer bkid;
+		    	 System.out.println("enter booking id:");
+		         bkid=sc.nextInt();
+		         bks.getBookingbyId(bkid);
+		    	 break;
+			case 5:
+				 Integer sid;
+		    	 System.out.println("enter staff id:");
+		         sid=sc.nextInt();
+		         ss.getStaffbyId(sid);
+		    	 break;	 
+			case 6:
+				 Integer gid;
+		    	 System.out.println("enter guest id:");
+		         gid=sc.nextInt();
+		         Gs.getGuestbyId(gid);
+		         break;
+			case 7:
+				 Integer pid;
+		    	 System.out.println("enter payment id:");
+		         pid=sc.nextInt();
+		         Ps.getPaymentbyId(pid);
+		    	 break;
+			default:System.out.println("invalid option");
+            break;
+			}
+     
+		System.out.println("1.get room details");
+	    System.out.println("2.get roomtype details");
+	    System.out.println("3.get hotel details");
+	    System.out.println("4.get booking details");
+	    System.out.println("5.get staff details");
+	    System.out.println("6.get guest details");
+	    System.out.println("7.get payment details\n Press 0 to exit");
+	    a = sc.nextInt();
+        }
+	 }
+		else if(user==2)
+		{
+			System.out.println("1.get room details");
+		    System.out.println("2.get roomtype details");
+		    System.out.println("3.get hotel details");
+		    System.out.println("4.get booking details");
+		    System.out.println("5.get staff details");
+		    System.out.println("6.get guest details");
+		    System.out.println("7.get payment details");
+		    System.out.println("8.insert room details");
+		    System.out.println("9.insert roomtype details");
+		    System.out.println("10.insert hotel details");
+		    System.out.println("11.insert booking details");
+		    System.out.println("12.insert staff details");
+		    System.out.println("13.insert guest details");
+		    System.out.println("14.insert payment details");
+		    System.out.println("15.update room details");
+		    System.out.println("16.update roomtype details");
+		    System.out.println("17.update hotel details");
+		    System.out.println("18.update booking details");
+		    System.out.println("19.update staff details");
+		    System.out.println("20.update guest details");
+		    System.out.println("21.update payment details");
+		    System.out.println("22.delete room details");
+		    System.out.println("23.delete roomtype details");
+		    System.out.println("24.delete hotel details");
+		    System.out.println("25.delete booking details");
+		    System.out.println("26.delete staff details");
+		    System.out.println("27.delete guest details");
+		    System.out.println("28.delete payment details");
+		    System.out.println("29.display room details");
+		    System.out.println("30.display roomtype details");
+		    System.out.println("31.display hotel details");
+		    System.out.println("32.display booking details");
+		    System.out.println("33.display staff details");
+		    System.out.println("34.display guest details");
+		    System.out.println("35.display payment details");
+		    System.out.println("Enter Choice");
+		    int a = sc.nextInt();
+		    while(a>0)
+		    {
+		      switch(a)
+		      {
+		      case 1: 
+	                 Integer rid;
+	       	      System.out.println("enter room id:");
+	       	      rid=sc.nextInt();
+	                 rs.getRoombyId(rid);
+	                 break;
+	            case 2:
+	           	    Integer rtd;
+	                System.out.println("enter roomtype id:");
+	                rtd=sc.nextInt();
+	                rts.getRoomTypebyId(rtd);
+	                break;
+	            case 3:
+					 Integer hid;
+				     System.out.println("enter hotel id:");
+				     hid=sc.nextInt();
+				     hs.getHotelbyId(hid);
+				     break;
+				case 4:
+					 Integer bkid;
+			    	 System.out.println("enter booking id:");
+			         bkid=sc.nextInt();
+			         bks.getBookingbyId(bkid);
+			    	 break;
+				case 5:
+					 Integer sid;
+			    	 System.out.println("enter staff id:");
+			         sid=sc.nextInt();
+			         ss.getStaffbyId(sid);
+			    	 break;	 
+				case 6:
+					 Integer gid;
+			    	 System.out.println("enter guest id:");
+			         gid=sc.nextInt();
+			         Gs.getGuestbyId(gid);
+			         break;
+				case 7:
+					 Integer pid;
+			    	 System.out.println("enter payment id:");
+			         pid=sc.nextInt();
+			         Ps.getPaymentbyId(pid);
+			    	 break;
+				case 8:
+					Room r=new Room();
+					System.out.println("enter room id");
+					r.setRoomId(sc.nextInt());
+					System.out.println("enter status");
+					r.setStatus(sc.next());
+					
+					//foreign key
+					rs.insertRoom(r);
+					System.out.println("enter HotelId");
+				    rs.add(sc.nextInt(), r);
+				    
+         		    System.out.println("enter RoomTypeId");
+				    rs.addRoomType(sc.nextInt(), r);
+					break;
+				case 9:
+					RoomType rt=new RoomType();
+					System.out.println("enter roomType id");
+					rt.setTypeID(sc.nextInt());
+					System.out.println("enter RoomName");
+					rt.setName(sc.next());
+					System.out.println("enter Description");
+					rt.setDescription(sc.next());
+					System.out.println("enter PricePerDay");
+					rt.setPricePerDay(sc.nextDouble());
+					System.out.println("enter Capacity");
+					rt.setCapacity(sc.nextInt());
+				
+					Room r1=new Room();
+					r1.setRoomId(sc.nextInt());
+					rt.getRoomslist().add(r1);
+					rts.insertRoomType(rt);
+					break;
+				case 10:
+					Hotel h=new Hotel();
+					System.out.println("enter Hotel id");
+					h.setHotelID(sc.nextInt());
+					System.out.println("enter Address");
+					h.setAddress(sc.next());
+					System.out.println("enter Phone");
+					h.setPhone(sc.next());
+					System.out.println("enter Email");
+					h.setEmail(sc.next());
+					System.out.println("enter Stars");
+					h.setStars(sc.nextInt());
+					System.out.println("enter CheckinTime");
+					h.setCheckinTime(sc.next());
+					System.out.println("enter CheckoutTime");
+					h.setCheckoutTime(sc.next());			
+					System.out.println("enter Name");
+					h.setName(sc.next());
+					Room room2=new Room();
+					System.out.println("enter RoomID");
+					room2.setRoomId(sc.nextInt());
+			        h.getRoomslist().add(room2);
+			        Staff staff2=new Staff();
+			        System.out.println("enter StaffID");
+			        staff2.setStaffID(sc.nextInt());
+				    h.getStafflist().add(staff2);
+				    
+					hs.insertHotel(h);
+					break;
+				case 11:
+					Booking B=new Booking();
+					System.out.println("enter Booking id");
+				    B.setBookingID(sc.nextInt());
+					System.out.println("enter CheckinDate");
+					B.setCheckinDate(sc.next());
+					System.out.println("enter CheckoutTime");
+					B.setCheckoutDate(sc.next());
+					System.out.println("enter TotalPrice");
+					B.setTotalPrice(sc.next());
+					bks.insertBooking(B);
+					System.out.println("enter GuestId");
+					bks.add(sc.nextInt(), B);
+					System.out.println("enter RoomId");
+					bks.addRoom(sc.nextInt(), B);
+					
+					/*
+					 * Room room=new Room(); System.out.println("enter room name");
+					 * room.set(sc.next()); Guest guest1=new Guest();
+					 * guest1.setGuestID(sc.nextInt()); B.setGuest(guest1);
+					 * 
+					 * bks.insertBooking(B);
+					 */
+					break;
+				case 12:
+					Staff s1=new Staff();
+					System.out.println("enter staff id");
+					s1.setStaffID(sc.nextInt());
+					System.out.println("enter FirstName");
+					s1.setFirstName(sc.next());
+					System.out.println("enter LastName");
+					s1.setLastName(sc.next());
+					System.out.println("enter Position");
+					s1.setPosition(sc.next());
+					System.out.println("enter Salary");
+					s1.setSalary(sc.nextDouble());
+					System.out.println("enter DateOfBirth");
+					s1.setDateOfBirth(sc.next());
+					System.out.println("enter Phone");
+					s1.setPhone(sc.next());
+					System.out.println("enter Email");
+					s1.setEmail(sc.next());
+					System.out.println("enter HireDate");
+					s1.setHireDate(sc.next());
+					
+					Hotel hotel2=new Hotel();
+					System.out.println("enter HotelID");
+					hotel2.setHotelID(sc.nextInt());
+					s1.setHotel(hotel2);
+					ss.insertstaff(s1);
+					break;
+				case 13:
+					Guest g1=new Guest();
+					System.out.println("enter Guest id");
+					g1.setGuestID(sc.nextInt());
+					System.out.println("enter FirstName");
+					g1.setFirstName(sc.next());
+					System.out.println("enter LastName");
+					g1.setLastName(sc.next());
+					System.out.println("enter DateOfBirth");
+					g1.setDateOfBirth(sc.next());
+					System.out.println("enter Address");
+					g1.setAddress(sc.next());
+					System.out.println("enter Phone");
+					g1.setPhone(sc.nextLong());
+					System.out.println("enter Email");
+					g1.setEmail(sc.next());
+					
+					Gs.insertGuest(g1);
+					break;
+				case 14:
+					Payment p1=new Payment();
+					System.out.println("enter Payment id");
+					p1.setPaymentID(sc.nextInt());
+					System.out.println("enter Amount");
+					p1.setAmount(sc.nextDouble());
+					System.out.println("enter PaymentendDate");
+					p1.setPaymentendDate(sc.next());
+					System.out.println("enter paymentMethod");
+					p1.setPaymentMethod(sc.next());
+					
+					
+					Booking booking2=new Booking();
+					System.out.println("enter booking id");
+					booking2.setBookingID(sc.nextInt());
+					p1.setBk(booking2);
+					Ps.insertPayment(p1);
+					
+					
+					break;
+				case 15:
+					Room room=new Room();
+					System.out.println("enter room id");
+					room.setRoomId(sc.nextInt());
+					System.out.println("enter status");
+					room.setStatus(sc.next());
+					rs.updateRoom(room);
+					break;
+				case 16:
+					RoomType rmt=new RoomType();
+					System.out.println("enter roomType id");
+					rmt.setTypeID(sc.nextInt());
+					System.out.println("enter RoomName");
+					rmt.setName(sc.next());
+					System.out.println("enter Description");
+					rmt.setDescription(sc.next());
+					System.out.println("enter PricePerDay");
+					rmt.setPricePerDay(sc.nextDouble());
+					System.out.println("enter Capacity");
+					rmt.setCapacity(sc.nextInt());
+					rts.updateRoomType(rmt);	
+					break;
+				case 17:
+					Hotel h1=new Hotel();
+					System.out.println("enter Hotel id");
+					h1.setHotelID(sc.nextInt());
+					System.out.println("enter Name");
+					h1.setName(sc.next());
+					System.out.println("enter Address");
+					h1.setAddress(sc.next());
+					System.out.println("enter Phone");
+					h1.setPhone(sc.next());
+					System.out.println("enter Email");
+					h1.setEmail(sc.next());
+					System.out.println("enter Stars");
+					h1.setStars(sc.nextInt());
+					System.out.println("enter CheckinTime");
+					h1.setCheckinTime(sc.next());
+					System.out.println("enter CheckoutTime");
+					h1.setCheckoutTime(sc.next());
+					hs.updateHotel(h1);
+					break;
+				case 18:
+					Booking B1=new Booking();
+					System.out.println("enter Booking id");
+				    B1.setBookingID(sc.nextInt());
+					System.out.println("enter CheckinDate");
+					B1.setCheckinDate(sc.next());
+					System.out.println("enter CheckoutTime");
+					B1.setCheckoutDate(sc.next());
+					System.out.println("enter TotalPrice");
+					B1.setTotalPrice(sc.next());
+					bks.updateBooking(B1);
+					
+					break;
+				case 19:
+					Staff st=new Staff();
+					System.out.println("enter staff Id");
+					st.setStaffID(sc.nextInt());
+					System.out.println("enter FirstName");
+					st.setFirstName(sc.next());
+					System.out.println("enter LastName");
+					st.setLastName(sc.next());
+					System.out.println("enter Position");
+					st.setPosition(sc.next());
+					System.out.println("enter Salary");
+					st.setSalary(sc.nextDouble());
+					System.out.println("enter DateOfBirth");
+					st.setDateOfBirth(sc.next());
+					System.out.println("enter Phone");
+					st.setPhone(sc.next());
+					System.out.println("enter Email");
+					st.setEmail(sc.next());
+					System.out.println("enter HireDate");
+					st.setHireDate(sc.next());
+					ss.updateStaff(st);
+					break;
+				case 20:
+					Guest g2=new Guest();
+					System.out.println("enter Guest id");
+					g2.setGuestID(sc.nextInt());
+					System.out.println("enter FirstName");
+					g2.setFirstName(sc.next());
+					System.out.println("enter LastName");
+					g2.setLastName(sc.next());
+					System.out.println("enter DateOfBirth");
+					g2.setDateOfBirth(sc.next());
+					System.out.println("enter Address");
+					g2.setAddress(sc.next());
+					System.out.println("enter Phone");
+					g2.setPhone(sc.nextLong());
+					System.out.println("enter Email");
+					g2.setEmail(sc.next());
+					Gs.updateGuest(g2);
+					break;
+				case 21:
+					Payment p2=new Payment();
+					System.out.println("enter Payment id");
+					p2.setPaymentID(sc.nextInt());
+					System.out.println("enter Amount");
+					p2.setAmount(sc.nextDouble());
+					System.out.println("enter PaymentendDate");
+					p2.setPaymentendDate(sc.next());
+					System.out.println("enter paymentMethod");
+					p2.setPaymentMethod(sc.next());
+					Ps.updatePayment(p2);
+					break;	
+				case 22:
+					Room r3=new Room();
+					System.out.println("enter room id");
+					r3.setRoomId(sc.nextInt());
+					rs.deleteRoom(r3);
+					break;
+				case 23:
+					RoomType rt3=new RoomType();
+					System.out.println("enter roomType id");
+					rt3.setTypeID(sc.nextInt());
+					rts.deleteRoomType(rt3);	
+					break;
+				case 24:
+					Hotel h2=new Hotel();
+					System.out.println("enter Hotel id");
+					h2.setHotelID(sc.nextInt());
+					hs.deleteHotel(h2);
+					break;
+				case 25:
+					Booking bk=new Booking();
+					System.out.println("enter Booking id");
+				    bk.setBookingID(sc.nextInt());
+					bks.deleteBooking(bk);
+					break;
+				case 26:
+					Staff s3=new Staff();
+					System.out.println("enter staff Id");
+					s3.setStaffID(sc.nextInt());
+					ss.deleteStaff(s3);
+					break;
+				case 27:
+					Guest g3=new Guest();
+					System.out.println("enter Guest id");
+					g3.setGuestID(sc.nextInt());
+					Gs.deleteGuest(g3);
+					break;
+				case 28:
+					Payment p3=new Payment();
+					System.out.println("enter Payment id");
+					p3.setPaymentID(sc.nextInt());
+					Ps.deletePayment(p3);
+					break;		
+				case 29:
+					rs.displayRoom();
+					break;
+				case 30:
+					rts.displayRoomType();	
+					break;
+				case 31:
+					hs.displayHotel();
+					break;
+				case 32:
+					bks.displayBooking();
+					break;
+				case 33:
+					ss.displayStaff();
+					break;
+				case 34:
+					Gs.displayGuest();
+					break;
+				case 35:
+				    Ps.displayPayment();
+					break;			
+				default:
+					System.out.println("invalid choice");
+					break;
+					
+		      }
+		      System.out.println("1.get room details");
+			    System.out.println("2.get roomtype details");
+			    System.out.println("3.get hotel details");
+			    System.out.println("4.get booking details");
+			    System.out.println("5.get staff details");
+			    System.out.println("6.get guest details");
+			    System.out.println("7.get payment details");
+			    System.out.println("8.insert room details");
+			    System.out.println("9.insert roomtype details");
+			    System.out.println("10.insert hotel details");
+			    System.out.println("11.insert booking details");
+			    System.out.println("12.insert staff details");
+			    System.out.println("13.insert guest details");
+			    System.out.println("14.insert payment details");
+			    System.out.println("15.update room details");
+			    System.out.println("16.update roomtype details");
+			    System.out.println("17.update hotel details");
+			    System.out.println("18.update booking details");
+			    System.out.println("19.update staff details");
+			    System.out.println("20.update guest details");
+			    System.out.println("21.update payment details");
+			    System.out.println("22.delete room details");
+			    System.out.println("23.delete roomtype details");
+			    System.out.println("24.delete hotel details");
+			    System.out.println("25.delete booking details");
+			    System.out.println("26.delete staff details");
+			    System.out.println("27.delete guest details");
+			    System.out.println("28.delete payment details");
+			    System.out.println("29.display room details");
+			    System.out.println("30.display roomtype details");
+			    System.out.println("31.display hotel details");
+			    System.out.println("32.display booking details");
+			    System.out.println("33.display staff details");
+			    System.out.println("34.display guest details");
+			    System.out.println("35.display payment details");
+			    System.out.println("Enter Choice");
+			    System.out.println("press 0 to exit");
+			    a=sc.nextInt();
+
+		    }
+		 	
+		
+	    }
+}
+}
+
+//ServiceImplTest:
+
+package com.service.test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import com.hotelManagement.entity.Booking;
+import com.hotelManagement.entity.Guest;
+import com.hotelManagement.entity.Hotel;
+import com.hotelManagement.entity.Payment;
+import com.hotelManagement.entity.Room;
+import com.hotelManagement.entity.RoomType;
+import com.hotelManagement.entity.Staff;
+import com.hotelManagement.service.GuestService;
+import com.hotelManagement.serviceImpl.BookingServiceImpl;
+import com.hotelManagement.serviceImpl.GuestServiceImpl;
+import com.hotelManagement.serviceImpl.HotelServiceImpl;
+import com.hotelManagement.serviceImpl.PaymentServiceImpl;
+import com.hotelManagement.serviceImpl.RoomServiceImpl;
+import com.hotelManagement.serviceImpl.RoomTypeServiceImpl;
+import com.hotelManagement.serviceImpl.StaffServiceImpl;
+
+
+public class ServiceImplTest 
+{
+    BookingServiceImpl ssimp=new BookingServiceImpl();
+    Booking Bk=new Booking();
+    GuestServiceImpl ssimp2=new GuestServiceImpl();
+    Guest G=new Guest();
+    HotelServiceImpl ssimp3=new HotelServiceImpl();
+    Hotel H=new Hotel();
+    RoomServiceImpl ssimp4=new RoomServiceImpl();
+    Room R=new Room();
+    RoomTypeServiceImpl ssimp5=new RoomTypeServiceImpl();
+    RoomType RT=new RoomType();
+    PaymentServiceImpl ssimp6=new PaymentServiceImpl();
+    Payment P=new Payment();
+    StaffServiceImpl ssimp7=new StaffServiceImpl();
+    Staff S=new Staff();
+//    
+    @Test
+    public void displayBooking()
+    {
+    	int Bk
+    	=ssimp.displayBooking();
+    	assertEquals(1,Bk);
+    	
+    }
+    @Test
+    public void getBookingbyId1()
+    {
+    	int Bk=ssimp.getBookingbyId(1);
+    	assertEquals(1,Bk);
+    }
+//   
+   @Test
+	public void displayGuest()
+	{
+		int G
+		=ssimp2.displayGuest();
+		assertEquals(1,G);
+	}
+//	@Test
+   public void getGuestbyId2()
+   {
+   	int G=ssimp2.getGuestbyId(2);
+   	assertEquals(1,G);
+   }
+	@Test
+	public void displayHotel()
+	{
+		int h
+		=ssimp3.displayHotel();
+		assertEquals(1,h);	
+	}
+//	@Test
+    public void getHotelbyId3()
+    {
+    	int h=ssimp3.getHotelbyId(3);
+    	assertEquals(1,h);
+    }
+	@Test
+	public void displayRoom()
+	{
+		int R
+		=ssimp4.displayRoom();
+		assertEquals(1,R);	
+	}
+//	@Test
+    public void getRoombyId4()
+    {
+    	int R=ssimp4.getRoombyId(4);
+    	assertEquals(1,R);
+    }
+	@Test
+	public void displayRoomType()
+	{
+		int RT
+		=ssimp5.displayRoomType();
+		assertEquals(1,RT);
+		
+	}
+//	@Test
+    public void getRoomTypebyId5()
+    {
+    	int RT=ssimp5.getRoomTypebyId(5);
+    	assertEquals(1,RT);
+    }
+    @Test
+	public void displayPayment()
+	{
+		int P
+		=ssimp6.displayPayment();
+		assertEquals(1,P);
+			
+	}
+ //  @Test
+    public void getPaymentbyId6()
+    {
+    	int P=ssimp6.getPaymentbyId(6);
+    	assertEquals(1,P);
+    } 
+	@Test
+	public void displayStaff()
+	{
+		int S
+		=ssimp7.displayStaff();
+		assertEquals(1,S);	
+	}
+	@Test
+    public void getStaffbyId7()
+    {
+    	int S=ssimp7.getStaffbyId(7);
+    	assertEquals(1,S);
+    }
+}
+	
